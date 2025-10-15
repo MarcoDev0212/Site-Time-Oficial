@@ -69,6 +69,23 @@
             from { opacity: 0; transform: translateY(20px) scale(0.95); } 
             to { opacity: 1; transform: translateY(0) scale(1); } 
         }
+        @keyframes textGlow {
+            0%, 100% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); }
+            50% { text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 20px rgba(220, 38, 38, 0.6); }
+        }
+        @keyframes numberPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        @keyframes positionSlide {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes instagramSpin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
         .animate-fadeIn { animation: fadeIn 0.8s ease-out forwards; }
         .animate-fadeInUp { animation: fadeInUp 0.8s ease-out forwards; }
         .animate-slideInLeft { animation: slideInLeft 0.8s ease-out forwards; }
@@ -77,6 +94,10 @@
         .animate-pulse { animation: pulse 2s infinite; }
         .animate-float { animation: float 3s ease-in-out infinite; }
         .animate-cardPop { animation: cardPop 0.6s ease-out forwards; }
+        .animate-textGlow { animation: textGlow 2s ease-in-out infinite; }
+        .animate-numberPulse { animation: numberPulse 1.5s ease-in-out infinite; }
+        .animate-positionSlide { animation: positionSlide 0.8s ease-out forwards; }
+        .animate-instagramSpin { animation: instagramSpin 2s ease-in-out infinite; }
         /* Utilitários */
         .container { max-width: var(--container-max); margin: 0 auto; padding: 0 1rem; }
         .section {
@@ -569,7 +590,7 @@
             color: var(--white);
             line-height: 1.6;
         }
-        /* Elenco Section */
+        /* Elenco Section - MELHORIAS APLICADAS */
         .players-horizontal {
             display: flex;
             gap: 1.5rem;
@@ -614,10 +635,10 @@
         }
         .player-header {
             position: relative;
-            height: 150px;
+            height: 250px; /* Aumentei a altura para vídeos maiores */
             overflow: hidden;
         }
-        .player-image {
+        .player-video {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -625,8 +646,11 @@
             z-index: 2;
             transition: var(--transition);
         }
-        .player-card:hover .player-image {
+        .player-card:hover .player-video {
             transform: scale(1.05);
+        }
+        .player-image {
+            display: none; /* Esconder imagem quando usar vídeo */
         }
         .player-avatar {
             display: none;
@@ -637,16 +661,18 @@
         }
         .player-name {
             font-family: var(--font-display);
-            font-size: 1.25rem;
+            font-size: 1.5rem; /* Aumentei o tamanho do nome */
             font-weight: 700;
             color: var(--neutral-900);
             margin-bottom: 0.25rem;
+            animation: textGlow 3s ease-in-out infinite; /* Adicionei animação de brilho */
         }
         .player-position {
             color: var(--secondary);
             font-weight: 600;
             margin-bottom: 0.75rem;
-            font-size: 0.9rem;
+            font-size: 1rem; /* Aumentei o tamanho da posição */
+            animation: positionSlide 1s ease-out forwards; /* Adicionei animação de entrada */
         }
         .player-description {
             color: var(--neutral-600);
@@ -664,10 +690,11 @@
         }
         .player-stat { text-align: center; }
         .player-stat-value {
-            font-size: 1.25rem;
+            font-size: 1.5rem; /* Aumentei o tamanho dos números */
             font-weight: 700;
             color: var(--accent);
             margin-bottom: 0.25rem;
+            animation: numberPulse 2s ease-in-out infinite; /* Adicionei animação de pulsar */
         }
         .player-stat-label {
             font-size: 0.75rem;
@@ -677,9 +704,9 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            font-size: 1.25rem;
-            width: 30px;
-            height: 30px;
+            font-size: 1.5rem; /* Aumentei o tamanho do ícone */
+            width: 40px; /* Aumentei o tamanho do botão */
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -687,6 +714,7 @@
             transition: var(--transition);
             z-index: 10;
             text-decoration: none;
+            animation: instagramSpin 3s ease-in-out infinite; /* Adicionei animação de rotação */
         }
         .instagram-link {
             background: var(--neutral-100);
@@ -698,6 +726,7 @@
             color: var(--white);
             transform: scale(1.1) rotate(5deg);
             box-shadow: var(--shadow-md);
+            animation: none; /* Remover animação ao passar o mouse */
         }
         /* Redes Section */
         .redes-section {
@@ -893,6 +922,12 @@
             }
             /* Reduzir animações em dispositivos móveis */
             .titulo-card, .player-card, .banner-image { animation: none; opacity: 1; }
+            /* Ajustes para o elenco em dispositivos móveis */
+            .player-header { height: 200px; } /* Ajuste para manter proporção */
+            .player-name { font-size: 1.3rem; }
+            .player-position { font-size: 0.9rem; }
+            .player-stat-value { font-size: 1.2rem; }
+            .social-link { font-size: 1.25rem; width: 35px; height: 35px; }
         }
         @media (max-width: 480px) {
             .container { padding: 0 0.5rem; }
@@ -1105,7 +1140,7 @@
         </section>
         <section id="elenco" class="elenco-section section" tabindex="-1">
             <video class="section-video" autoplay loop muted playsinline>
-                <source src="3722209-hd_1920_1080_25fps.mp4" type="video/mp4">
+                <source src="" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
             <div class="container section-content">
@@ -1117,7 +1152,11 @@
                     <!-- Atacante: Braga -->
                     <article class="player-card" style="animation-delay: 0.2s;">
                         <div class="player-header">
-                            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Imagem de Braga, atacante do CONFLITO FC" class="player-image" loading="lazy">
+                            <!-- Substituído imagem por vídeo -->
+                            <video class="player-video" autoplay loop muted playsinline>
+                                <source src="teste.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
                         </div>
                         <div class="player-info">
                             <h4 class="player-name">Braga</h4>
@@ -1136,7 +1175,11 @@
                     <!-- Atacante: BellHome -->
                     <article class="player-card" style="animation-delay: 0.3s;">
                         <div class="player-header">
-                            <img src="https://images.unsplash.com/photo-1607783616288-517192e77445?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Imagem de BellHome, atacante do CONFLITO FC" class="player-image" loading="lazy">
+                            <!-- Substituído imagem por vídeo -->
+                            <video class="player-video" autoplay loop muted playsinline>
+                                <source src="https://assets.codepen.io/3364143/stock-video-2.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
                         </div>
                         <div class="player-info">
                             <h4 class="player-name">BellHome</h4>
@@ -1155,7 +1198,11 @@
                     <!-- Zagueiro: Muro_Defesa -->
                     <article class="player-card" style="animation-delay: 0.4s;">
                         <div class="player-header">
-                            <img src="https://images.unsplash.com/photo-1607783616288-517192e77445?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Imagem de Muro_Defesa, zagueiro do CONFLITO FC" class="player-image" loading="lazy">
+                            <!-- Substituído imagem por vídeo -->
+                            <video class="player-video" autoplay loop muted playsinline>
+                                <source src="https://assets.codepen.io/3364143/stock-video-3.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
                         </div>
                         <div class="player-info">
                             <h4 class="player-name">Muro_Defesa</h4>
@@ -1174,7 +1221,11 @@
                     <!-- Meio-Campista: Markito10 -->
                     <article class="player-card" style="animation-delay: 0.5s;">
                         <div class="player-header">
-                            <img src="https://images.unsplash.com/photo-1611003229184-018b9f6e182e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Imagem de Markito10_, meio-campista do CONFLITO FC" class="player-image" loading="lazy">
+                            <!-- Substituído imagem por vídeo -->
+                            <video class="player-video" autoplay loop muted playsinline>
+                                <source src="https://assets.codepen.io/3364143/stock-video-4.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
                         </div>
                         <div class="player-info">
                             <h4 class="player-name">Markito10</h4>
