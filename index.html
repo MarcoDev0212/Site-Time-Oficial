@@ -889,12 +889,29 @@
             border-color: #dc2626 !important;
             box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1) !important;
         }
-        /* Responsividade */
+        
+        /* ============ OTIMIZAÇÕES MOBILE ============ */
+        
+        /* Mobile First - Ajustes para telas menores */
+        @media (max-width: 1024px) {
+            .container { padding: 0 1rem; }
+            .section { padding: 3rem 0; }
+            .section-title { font-size: clamp(1.75rem, 4vw, 2.25rem); }
+            .section-subtitle { font-size: 0.95rem; margin-bottom: 1.5rem; }
+        }
+        
         @media (max-width: 768px) {
+            /* Header compacto */
+            .header { padding: 0.5rem 0; }
+            .nav-container { padding: 0.5rem 1rem; }
+            .logo { font-size: 1.1rem; }
+            .logo-icon { font-size: 1.25rem; }
+            
+            /* Menu mobile otimizado */
             .nav-menu {
                 display: none;
-                position: absolute;
-                top: 100%;
+                position: fixed;
+                top: 60px;
                 left: 0;
                 right: 0;
                 background: var(--neutral-900);
@@ -902,64 +919,339 @@
                 padding: 1rem;
                 box-shadow: var(--shadow-lg);
                 border-top: 1px solid var(--neutral-200);
+                max-height: calc(100vh - 60px);
+                overflow-y: auto;
             }
             .nav-menu.active { display: flex; }
-            .mobile-menu-btn { display: block; }
-            .hero { min-height: 60vh; }
-            .hero-buttons { flex-direction: column; align-items: center; }
-            .hero-title { white-space: normal; border-right: none; }
-            .about-grid { grid-template-columns: 1fr; }
-            .about-image img { height: 200px; }
-            .hero-stats, .stats-grid, .social-grid, .titulos-horizontal, .players-horizontal { grid-template-columns: 1fr; }
-            .banner-image img { max-height: 300px; }
+            .nav-link { 
+                padding: 0.75rem 1rem; 
+                font-size: 1rem;
+                justify-content: center;
+            }
+            .mobile-menu-btn { 
+                display: block; 
+                font-size: 1.5rem;
+            }
+            
+            /* Hero section compacta */
+            .hero { 
+                min-height: 70vh; 
+                padding: 2rem 0;
+            }
+            .hero-title { 
+                font-size: clamp(1.75rem, 6vw, 2.5rem);
+                margin-bottom: 0.75rem;
+            }
+            .hero-subtitle { 
+                font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+                margin-bottom: 1rem;
+            }
+            .hero-description { 
+                font-size: 0.85rem;
+                margin-bottom: 1.5rem;
+            }
+            .hero-buttons { 
+                flex-direction: column; 
+                align-items: center;
+                gap: 0.75rem;
+            }
+            .hero-stats { 
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.75rem;
+                margin-top: 1.5rem;
+            }
+            .hero-stat { 
+                padding: 1rem 0.5rem;
+            }
+            .hero-stat-number { 
+                font-size: 1.5rem;
+            }
+            .hero-stat-label { 
+                font-size: 0.8rem;
+            }
+            
+            /* Seções compactas */
+            .section { 
+                padding: 2.5rem 0;
+            }
+            .section-title { 
+                font-size: clamp(1.5rem, 4vw, 2rem);
+                margin-bottom: 0.5rem;
+            }
+            .section-subtitle { 
+                font-size: 0.9rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            /* Grids otimizados */
+            .about-grid { 
+                gap: 1.5rem;
+                margin-bottom: 2rem;
+            }
+            .about-content h3 { 
+                font-size: 1.5rem;
+                margin-bottom: 0.75rem;
+            }
+            .about-content p { 
+                font-size: 0.85rem;
+                margin-bottom: 0.75rem;
+            }
+            .about-image img { 
+                height: 180px;
+            }
+            
+            .stats-grid, .social-grid, .hero-stats { 
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+            
+            /* Cards compactos */
             .titulos-horizontal, .players-horizontal, .banners-horizontal {
                 flex-direction: column;
                 gap: 1rem;
+                margin-bottom: 1.5rem;
             }
             .titulo-card, .player-card, .banner-image {
                 flex: 1 1 100%;
                 max-width: none;
             }
+            
+            /* Player cards otimizados */
+            .player-header { 
+                height: 200px;
+            }
+            .player-info { 
+                padding: 1.25rem;
+            }
+            .player-name { 
+                font-size: 1.3rem;
+            }
+            .player-position { 
+                font-size: 0.9rem;
+            }
+            .player-stat-value { 
+                font-size: 1.2rem;
+            }
+            .social-link { 
+                font-size: 1.25rem; 
+                width: 35px; 
+                height: 35px;
+            }
+            
+            /* Banner images otimizadas */
+            .banner-image img { 
+                max-height: 250px;
+            }
+            
+            /* Social cards compactos */
+            .social-card { 
+                padding: 1.5rem 1rem;
+            }
+            .social-icon { 
+                font-size: 2.5rem;
+            }
+            .social-title { 
+                font-size: 1.1rem;
+            }
+            .social-description { 
+                font-size: 0.85rem;
+                margin-bottom: 1.25rem;
+            }
+            
+            /* Footer compacto */
+            .footer { 
+                padding: 1.5rem 0 1rem;
+            }
+            .footer p { 
+                font-size: 0.85rem;
+            }
+            
+            /* Modal otimizado */
+            .modal-content { 
+                margin: 10% 0.5rem;
+                padding: 1.5rem;
+            }
+            .modal-title { 
+                font-size: 1.25rem;
+            }
+            .modal-subtitle { 
+                font-size: 0.85rem;
+            }
+            
             /* Reduzir animações em dispositivos móveis */
-            .titulo-card, .player-card, .banner-image { animation: none; opacity: 1; }
-            /* Ajustes para o elenco em dispositivos móveis */
-            .player-header { height: 200px; } /* Ajuste para manter proporção */
-            .player-name { font-size: 1.3rem; }
-            .player-position { font-size: 0.9rem; }
-            .player-stat-value { font-size: 1.2rem; }
-            .social-link { font-size: 1.25rem; width: 35px; height: 35px; }
+            .titulo-card, .player-card, .banner-image { 
+                animation: none; 
+                opacity: 1; 
+            }
         }
+        
         @media (max-width: 480px) {
-            .container { padding: 0 0.5rem; }
+            /* Ajustes para telas muito pequenas */
+            .container { padding: 0 0.75rem; }
             .section { padding: 2rem 0; }
-            .section-title { font-size: clamp(1.5rem, 3vw, 2rem); }
-            .section-subtitle { font-size: 0.9rem; }
-            .hero-title { font-size: clamp(1.5rem, 5vw, 2rem); }
-            .hero-subtitle { font-size: 0.9rem; }
-            .hero-description { font-size: 0.8rem; }
-            .hero-stat-number, .stat-number { font-size: 1.5rem; }
-            .hero-stat-label, .stat-label { font-size: 0.8rem; }
-            .player-name { font-size: 1.1rem; }
-            .player-position { font-size: 0.8rem; }
-            .player-description { font-size: 0.75rem; }
-            .player-stat-value { font-size: 1rem; }
-            .player-stat-label { font-size: 0.7rem; }
-            .social-icon { font-size: 2.5rem; }
-            .social-title { font-size: 1.1rem; }
-            .social-description { font-size: 0.8rem; }
-            .modal-content { padding: 15px; }
-            .modal-title { font-size: 1.25rem; }
-            .modal-subtitle { font-size: 0.8rem; }
-            .form-group label { font-size: 0.8rem; }
-            .form-group input[type="text"], .form-group select { font-size: 0.8rem; }
-            .btn { font-size: 0.8rem; padding: 0.5rem 1rem; }
-            .titulo-name { font-size: 1.1rem; }
-            .titulo-year { font-size: 0.8rem; }
-            .titulo-description { font-size: 0.75rem; }
-            .banner-image img { max-height: 250px; }
-            .banner-description { font-size: 0.8rem; }
-            .titulo-header, .player-header { height: 120px; }
+            
+            .hero { 
+                min-height: 60vh;
+                padding: 1.5rem 0;
+            }
+            .hero-title { 
+                font-size: clamp(1.5rem, 5vw, 2rem);
+                white-space: normal;
+                border-right: none;
+            }
+            .hero-subtitle { 
+                font-size: 0.9rem;
+            }
+            .hero-description { 
+                font-size: 0.8rem;
+            }
+            .hero-buttons .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .hero-stats { 
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.5rem;
+            }
+            .hero-stat { 
+                padding: 0.75rem 0.25rem;
+            }
+            .hero-stat-number, .stat-number { 
+                font-size: 1.25rem;
+            }
+            .hero-stat-label, .stat-label { 
+                font-size: 0.75rem;
+            }
+            
+            .section-title { 
+                font-size: clamp(1.25rem, 3vw, 1.75rem);
+            }
+            .section-subtitle { 
+                font-size: 0.85rem;
+            }
+            
+            .about-content h3 { 
+                font-size: 1.25rem;
+            }
+            .about-content p { 
+                font-size: 0.8rem;
+            }
+            .about-image img { 
+                height: 150px;
+            }
+            
+            .player-header { 
+                height: 180px;
+            }
+            .player-info { 
+                padding: 1rem;
+            }
+            .player-name { 
+                font-size: 1.1rem;
+            }
+            .player-position { 
+                font-size: 0.85rem;
+            }
+            .player-description { 
+                font-size: 0.75rem;
+            }
+            .player-stat-value { 
+                font-size: 1rem;
+            }
+            .player-stat-label { 
+                font-size: 0.7rem;
+            }
+            
+            .social-icon { 
+                font-size: 2rem;
+            }
+            .social-title { 
+                font-size: 1rem;
+            }
+            .social-description { 
+                font-size: 0.8rem;
+            }
+            
+            .modal-content { 
+                padding: 1.25rem;
+            }
+            .modal-title { 
+                font-size: 1.1rem;
+            }
+            .modal-subtitle { 
+                font-size: 0.8rem;
+            }
+            .form-group label { 
+                font-size: 0.85rem;
+            }
+            .form-group input[type="text"], .form-group select { 
+                font-size: 0.85rem;
+                padding: 0.6rem;
+            }
+            .btn { 
+                font-size: 0.85rem; 
+                padding: 0.6rem 1.25rem;
+            }
+            
+            .titulo-name { 
+                font-size: 1.1rem;
+            }
+            .titulo-year { 
+                font-size: 0.8rem;
+            }
+            .titulo-description { 
+                font-size: 0.75rem;
+            }
+            
+            .banner-image img { 
+                max-height: 200px;
+            }
+            .banner-description { 
+                font-size: 0.8rem;
+            }
+            
+            .titulo-header, .player-header { 
+                height: 140px;
+            }
+            
+            .footer { 
+                padding: 1.25rem 0 0.75rem;
+            }
+            .footer p { 
+                font-size: 0.8rem;
+            }
         }
+        
+        /* Otimizações de performance para mobile */
+        @media (max-width: 768px) {
+            /* Reduzir efeitos pesados em mobile */
+            .hero-stat::before,
+            .stat-card::before,
+            .btn::before {
+                display: none;
+            }
+            
+            /* Simplificar animações */
+            .animate-fadeIn,
+            .animate-fadeInUp,
+            .animate-slideInLeft,
+            .animate-slideInRight,
+            .animate-scaleIn,
+            .animate-cardPop {
+                animation: none;
+                opacity: 1;
+                transform: none;
+            }
+            
+            /* Manter apenas animações essenciais */
+            .animate-pulse,
+            .animate-textGlow,
+            .animate-numberPulse,
+            .animate-instagramSpin {
+                animation-duration: 3s; /* Mais lento para economizar bateria */
+            }
+        }
+
         /* Efeitos Adicionais */
         .shimmer {
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
@@ -1140,7 +1432,7 @@
         </section>
         <section id="elenco" class="elenco-section section" tabindex="-1">
             <video class="section-video" autoplay loop muted playsinline>
-                <source src="" type="video/mp4">
+                <source src="3722209-hd_1920_1080_25fps.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
             <div class="container section-content">
@@ -1154,7 +1446,7 @@
                         <div class="player-header">
                             <!-- Substituído imagem por vídeo -->
                             <video class="player-video" autoplay loop muted playsinline>
-                                <source src="teste.mp4" type="video/mp4">
+                                <source src="https://assets.codepen.io/3364143/stock-video-1.mp4" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
                         </div>
@@ -1223,7 +1515,7 @@
                         <div class="player-header">
                             <!-- Substituído imagem por vídeo -->
                             <video class="player-video" autoplay loop muted playsinline>
-                                <source src="https://assets.codepen.io/3364143/stock-video-4.mp4" type="video/mp4">
+                                <source src="teste.mp4" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
                         </div>
